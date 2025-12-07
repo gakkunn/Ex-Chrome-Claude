@@ -1,0 +1,202 @@
+{
+  "extension_name": {
+    "message": "Claude Shortcut Effective Extension",
+    "description": "Extension name shown in stores and Chrome UI."
+  },
+  "extension_description": {
+    "message": "更安全的傳送、類 Vim 的捲動、模型切換、暫存聊天，以及乾淨的 Claude 介面。",
+    "description": "Extension description displayed in the Chrome Web Store."
+  },
+  "popup_title": {
+    "message": "Claude Shortcut Extension",
+    "description": "Main title displayed at the top of the popup/options page."
+  },
+  "popup_button_reset": {
+    "message": "重設",
+    "description": "Button label that resets all settings to defaults."
+  },
+  "popup_section_features": {
+    "message": "功能",
+    "description": "Heading for the feature toggle list."
+  },
+  "popup_section_shortcuts": {
+    "message": "快捷鍵",
+    "description": "Heading for the shortcuts customization section."
+  },
+  "popup_message_enable_feature": {
+    "message": "請先啟用上方的功能才能自訂其快捷鍵。",
+    "description": "Helper message shown when no shortcuts can be edited."
+  },
+  "popup_placeholder_press_keys": {
+    "message": "請按下按鍵",
+    "description": "Placeholder text inside the shortcut input field."
+  },
+  "popup_aria_shortcut_input": {
+    "message": "「$shortcutName$」的快捷鍵",
+    "description": "ARIA label for the shortcut input describing which shortcut it edits.",
+    "placeholders": {
+      "shortcutName": {
+        "content": "$1",
+        "example": "Scroll to Top"
+      }
+    }
+  },
+  "popup_error_shortcut_conflict": {
+    "message": "「$binding$」已指派給「$conflict$」。",
+    "description": "Error message when a shortcut binding conflicts with another shortcut.",
+    "placeholders": {
+      "binding": {
+        "content": "$1",
+        "example": "⌘+K"
+      },
+      "conflict": {
+        "content": "$2",
+        "example": "Scroll to Top"
+      }
+    }
+  },
+  "popup_error_shortcut_key_blocked": {
+    "message": "This key cannot be used in shortcuts.",
+    "description": "Error when a key is not allowed for shortcuts."
+  },
+  "popup_error_shortcut_single_key_blocked": {
+    "message": "Esc/Backspace/Delete cannot be used alone. Add a modifier key.",
+    "description": "Error when a forbidden key is entered without modifiers."
+  },
+  "error_shortcut_requires_modifier": {
+    "message": "「$1」必須與修飾鍵一起使用。",
+    "description": "Shown when a disallowed single key is used without modifiers."
+  },
+  "error_shortcut_forbidden_key": {
+    "message": "「$1」無法作為快捷鍵使用。",
+    "description": "Shown when a key is not allowed at all."
+  },
+  "feature_toggle_vim_scroll": {
+    "message": "類 Vim 捲動",
+    "description": "Label for the Vim-style scrolling feature toggle."
+  },
+  "feature_toggle_wide_screen": {
+    "message": "寬螢幕 / 專注",
+    "description": "Label for the wide screen and focus feature toggle."
+  },
+  "feature_toggle_safe_send": {
+    "message": "使用 Cmd/Ctrl + Enter 傳送",
+    "description": "Label for the safe send feature toggle."
+  },
+  "feature_toggle_other_shortcuts": {
+    "message": "其他快捷鍵",
+    "description": "Label for the miscellaneous shortcuts toggle."
+  },
+  "shortcut_scroll_top": {
+    "message": "捲動至頂端",
+    "description": "Shortcut label for scrolling to the top."
+  },
+  "shortcut_scroll_bottom": {
+    "message": "捲動至底部",
+    "description": "Shortcut label for scrolling to the bottom."
+  },
+  "shortcut_scroll_up": {
+    "message": "向上捲動",
+    "description": "Shortcut label for scrolling up."
+  },
+  "shortcut_scroll_down": {
+    "message": "向下捲動",
+    "description": "Shortcut label for scrolling down."
+  },
+  "shortcut_scroll_half_up": {
+    "message": "向上捲動半頁",
+    "description": "Shortcut label for scrolling half a page up."
+  },
+  "shortcut_scroll_half_down": {
+    "message": "向下捲動半頁",
+    "description": "Shortcut label for scrolling half a page down."
+  },
+  "shortcut_toggle_focus": {
+    "message": "切換專注",
+    "description": "Shortcut label for toggling focus mode."
+  },
+  "shortcut_toggle_sidebar": {
+    "message": "切換側邊欄",
+    "description": "Shortcut label for pinning or unpinning the sidebar."
+  },
+  "shortcut_open_new_chat": {
+    "message": "開啟新對話",
+    "description": "Shortcut label for opening a new chat."
+  },
+  "shortcut_toggle_incognito_chat": {
+    "message": "隱身對話",
+    "description": "Shortcut label for toggling incognito chat."
+  },
+  "shortcut_delete_chat": {
+    "message": "刪除對話",
+    "description": "Shortcut label for deleting the current chat."
+  },
+  "shortcut_bookmark_chat": {
+    "message": "加星號對話",
+    "description": "Shortcut label for starring/bookmarking the current chat."
+  },
+  "shortcut_toggle_model": {
+    "message": "切換模型",
+    "description": "Shortcut label for toggling the model selector."
+  },
+  "shortcut_select_haiku": {
+    "message": "Haiku 4.5",
+    "description": "Shortcut label for selecting the Haiku 4.5 model."
+  },
+  "shortcut_select_sonnet": {
+    "message": "Sonnet 4.5",
+    "description": "Shortcut label for selecting the Sonnet 4.5 model."
+  },
+  "shortcut_select_opus": {
+    "message": "Opus 4.5",
+    "description": "Shortcut label for selecting the Opus 4.5 model."
+  },
+  "dialog_section_claude_defaults": {
+    "message": "Claude 預設",
+    "description": "Heading for the Claude default shortcuts section in the dialog."
+  },
+  "dialog_section_extension": {
+    "message": "擴充功能",
+    "description": "Heading for the extension-specific shortcuts section."
+  },
+  "dialog_setting_shortcut_key": {
+    "message": "設定快捷鍵",
+    "description": "Row label prompting users to open settings to edit shortcuts."
+  },
+  "dialog_link_click_here": {
+    "message": "點擊這裡",
+    "description": "Link text that opens the extension settings page."
+  },
+  "dialog_default_keyboard_shortcuts": {
+    "message": "鍵盤快捷鍵",
+    "description": "Name of Claude's default keyboard shortcuts row."
+  },
+  "dialog_default_settings": {
+    "message": "設定",
+    "description": "Name of the Settings shortcut row in the dialog."
+  },
+  "dialog_default_toggle_extended_thinking": {
+    "message": "切換延伸思考",
+    "description": "Name of the extended thinking shortcut row."
+  },
+  "dialog_default_upload_file": {
+    "message": "上傳檔案",
+    "description": "Name of the upload file shortcut row."
+  },
+  "dialog_default_stop_response": {
+    "message": "停止 Claude 的回應",
+    "description": "Name of the stop response shortcut row."
+  },
+  "key_space": {
+    "message": "空白鍵",
+    "description": "Localized label for the Space key when rendered in the dialog."
+  },
+  "key_enter": {
+    "message": "Enter",
+    "description": "Localized label for the Enter key when rendered in the dialog."
+  },
+  "key_escape": {
+    "message": "Esc",
+    "description": "Localized label for the Escape key when rendered in the dialog."
+  }
+}

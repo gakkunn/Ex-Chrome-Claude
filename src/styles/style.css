@@ -1,0 +1,80 @@
+.cws-fieldset {
+  position: relative;
+}
+
+.cws-fieldset .cws-composer {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.cws-fieldset:hover .cws-composer,
+.cws-fieldset.cws-focused .cws-composer,
+.cws-fieldset .cws-composer:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* for clean ui on claude.ai */
+.font-display.w-full.sm\:-ml-0\.5.sm\:block {
+  opacity: 0;
+}
+
+ul[aria-label='Prompt categories'] {
+  display: none;
+}
+
+/* Hide gradient shadow below header */
+body.cps-wide-screen-enabled header[data-testid='page-header'] > div.absolute.blur-sm {
+  display: none !important;
+}
+/* 1. Header settings: transparent background & click-through */
+body.cps-wide-screen-enabled header[data-testid='page-header'] {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent !important;
+  border-bottom: none !important;
+  z-index: 10;
+  pointer-events: none; /* Pass clicks through to content below */
+}
+
+/* Re-enable click events for buttons inside header */
+body.cps-wide-screen-enabled header[data-testid='page-header'] button {
+  pointer-events: auto !important;
+}
+
+/* 2. Hide background blur effects */
+body.cps-wide-screen-enabled header[data-testid='page-header'] > div.absolute {
+  display: none !important;
+}
+
+/* 3. Expand content area to full screen */
+body.cps-wide-screen-enabled header[data-testid='page-header'] + div {
+  height: 100% !important;
+  max-height: 100% !important;
+  padding-top: 3rem !important; /* Prevent content from being hidden behind header */
+}
+
+/* 4. Fix Share button position to top-right */
+body.cps-wide-screen-enabled [data-testid='wiggle-controls-actions'] {
+  position: absolute !important; /* Changed from relative to absolute */
+  top: 0.8rem !important; /* Distance from top (adjusted for header height) */
+  right: 1rem !important; /* Distance from right */
+  z-index: 100 !important; /* Bring to front */
+  margin: 0 !important; /* Remove extra margins */
+  pointer-events: auto !important; /* Enable click events */
+}
+
+body.cps-wide-screen-enabled button[data-testid='chat-title-button'] {
+  display: none !important;
+}
+body.cps-wide-screen-enabled div[data-testid='wiggle-controls-actions'] {
+  padding-bottom: 22px;
+  padding-right: 0;
+}
+
+button[aria-label='Scroll to bottom'] {
+  display: none !important;
+}

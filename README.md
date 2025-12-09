@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
+Chrome Web Store: [Claude Shortcut Effective Extension](https://chromewebstore.google.com/detail/claude-shortcut-effective/iimjloenddcpaddfdigacfegicopfdkg?authuser=0&hl=en)
+
 ## Overview
 
 Chrome extension for claude.ai that adds safer sending, vim-style scrolling, wide-screen focus layout, and keyboard shortcuts for common Claude actions such as model switching, incognito chats, and quick cleanup. Built with Manifest v3 and Preact.
@@ -31,8 +33,7 @@ This is an open-source extension implemented based on Chrome Extension Manifest 
 
 ## Installation
 
-> ℹ️ **Not yet published to the Chrome Web Store.**  
-> You can use it via "Local Installation (Developer Mode)" below.
+Chrome Web Store: [Claude Shortcut Effective Extension](https://chromewebstore.google.com/detail/claude-shortcut-effective/iimjloenddcpaddfdigacfegicopfdkg?authuser=0&hl=en)
 
 ### 1. Clone the repository
 

@@ -78,3 +78,9 @@ body.cps-wide-screen-enabled div[data-testid='wiggle-controls-actions'] {
 button[aria-label='Scroll to bottom'] {
   display: none !important;
 }
+
+/* Hide disclaimer note when Wide Screen / Focus mode is enabled */
+body.cps-wide-screen-enabled .sticky [role='note'] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

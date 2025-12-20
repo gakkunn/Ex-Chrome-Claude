@@ -38,6 +38,9 @@ export class FocusManager {
 
   toggleFocus(): void {
     if (!this.enabled) return;
+
+    this.ensureActiveInputBound();
+
     const active = this.getActiveInput();
     if (active) {
       this.blurInput(active);
@@ -47,6 +50,16 @@ export class FocusManager {
     const target = this.chooseTargetInput();
     if (target) {
       this.focusInput(target);
+    }
+  }
+
+  private ensureActiveInputBound(): void {
+    const inputs = this.collectInputs();
+    for (const input of inputs) {
+      if (this.isInputFocused(input) && !this.bindings.has(input)) {
+        this.bindInput(input);
+        break;
+      }
     }
   }
 

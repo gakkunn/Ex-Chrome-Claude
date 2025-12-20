@@ -1,18 +1,32 @@
+import { copyFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath, URL } from 'node:url';
 
 import { crx } from '@crxjs/vite-plugin';
 import preact from '@preact/preset-vite';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 
 import manifest from './src/manifest/manifest.config';
 
 const resolvePath = (relativePath: string) => fileURLToPath(new URL(relativePath, import.meta.url));
 
+function copyStylesPlugin(): Plugin {
+  return {
+    name: 'copy-styles',
+    writeBundle() {
+      const srcPath = resolvePath('./src/styles/style.css');
+      const destDir = resolvePath('./dist/styles');
+      const destPath = resolvePath('./dist/styles/style.css');
+      mkdirSync(destDir, { recursive: true });
+      copyFileSync(srcPath, destPath);
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   const isProduction = mode === 'production';
 
   return {
-    plugins: [preact(), crx({ manifest })],
+    plugins: [preact(), crx({ manifest }), copyStylesPlugin()],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),

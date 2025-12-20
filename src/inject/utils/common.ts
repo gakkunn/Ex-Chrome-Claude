@@ -13,7 +13,7 @@ export const SELECTORS = {
   CHAT_MENU_TRIGGER: 'button[data-testid="chat-menu-trigger"]',
   MODEL_DROPDOWN: 'button[data-testid="model-selector-dropdown"]',
   MODEL_MENU_CONTAINER: 'div[data-radix-menu-content][role="menu"][data-state="open"]',
-  MODEL_MENU_ITEM: 'div[role="menuitem"] .font-ui-serif',
+  MODEL_MENU_ITEM: 'div[role="menuitem"] .font-ui, div[role="menuitem"] .font-ui-serif',
 } as const;
 
 const DEFAULT_WAIT_OPTIONS = {

@@ -2,6 +2,26 @@ import { isModKey } from '@/shared/keyboard';
 
 import { SELECTORS, simulateMouseClick, waitFor } from '../utils/common';
 
+const INPUT_SELECTORS = {
+  RICH: 'div.tiptap.ProseMirror[contenteditable="true"][data-testid="chat-input"]',
+  SSR: 'textarea[data-testid="chat-input-ssr"]',
+} as const;
+
+function focusInputAfterModelSwitch(): void {
+  window.setTimeout(() => {
+    const rich = document.querySelector<HTMLElement>(INPUT_SELECTORS.RICH);
+    if (rich) {
+      rich.focus();
+      return;
+    }
+
+    const ssr = document.querySelector<HTMLElement>(INPUT_SELECTORS.SSR);
+    if (ssr) {
+      ssr.focus();
+    }
+  }, 100);
+}
+
 function getDropdownButton(): HTMLButtonElement | null {
   return document.querySelector<HTMLButtonElement>(SELECTORS.MODEL_DROPDOWN);
 }
@@ -61,6 +81,7 @@ export async function selectModelByName(modelName: string): Promise<void> {
   try {
     const item = await waitFor(() => findModelMenuItemByName(modelName));
     simulateMouseClick(item);
+    focusInputAfterModelSwitch();
   } catch {
     // Silent error
   }

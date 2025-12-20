@@ -33,6 +33,14 @@ const initialSettings: SettingsData = {
   shortcuts: { ...DEFAULT_SHORTCUTS },
 };
 
+const GITHUB_URL = 'https://github.com/gakkunn/Ex-Chrome-Claude';
+const SUPPORT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScTb5N21gzjuGKWrSeoNwy7HZdcSmU9kKJGnJ-PMHwla8sHGA/viewform';
+const COFFEE_URL = 'https://buymeacoffee.com/gakkunn';
+
+const ICON_GITHUB_SRC = '/img/github.svg';
+const ICON_SUPPORT_SRC = '/img/support.svg';
+const ICON_COFFEE_SRC = '/img/coffee.svg';
+
 const formatKey = (key?: string): string => {
   if (!key) return '';
   const lower = key.toLowerCase();
@@ -466,6 +474,50 @@ export function App() {
           </p>
         )}
       </section>
+
+      <footer className="popup-footer">
+        <section className="links">
+          <div>
+            <a
+              className="footer-button github-button"
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Contribute"
+            >
+              <span>
+                <img className="icon" src={ICON_GITHUB_SRC} alt="Contribute" />
+              </span>
+            </a>
+          </div>
+          <div>
+            <a
+              className="footer-button question-button"
+              href={SUPPORT_FORM_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Support"
+            >
+              <span>
+                <img className="icon" src={ICON_SUPPORT_SRC} alt="Report a problem" />
+              </span>
+            </a>
+          </div>
+          <div>
+            <a
+              className="footer-button coffee-button"
+              href={COFFEE_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Buy me a coffee"
+            >
+              <span>
+                <img className="icon" src={ICON_COFFEE_SRC} alt="Buy me a coffee" />
+              </span>
+            </a>
+          </div>
+        </section>
+      </footer>
     </div>
   );
 }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 - 2026-01-04
+
+### Features
+- Add Windows platform detection and Haiku shortcut fix
+
+### Documentation
+- Update keyboard shortcuts for Windows Haiku binding
+
 ## 1.1.0 - 2025-12-20
 
 ### Features

@@ -1,4 +1,5 @@
 import { I18N_KEYS, type I18nKey } from './i18n-keys';
+import { isWindowsPlatform, normalizeModifiers } from './keyboard';
 
 export type FeatureToggleKey = 'vimScroll' | 'wideScreen' | 'safeSend' | 'otherShortcuts';
 
@@ -71,6 +72,24 @@ export const DEFAULT_FEATURE_TOGGLES: Record<FeatureToggleKey, boolean> = {
   safeSend: true,
   otherShortcuts: true,
 };
+
+const HAIKU_NON_WINDOWS_DEFAULT_BINDING: KeyBinding = {
+  key: '0',
+  code: 'Digit0',
+  mod: true,
+  shift: true,
+};
+
+const HAIKU_WINDOWS_DEFAULT_BINDING: KeyBinding = {
+  key: '7',
+  code: 'Digit7',
+  mod: true,
+  shift: true,
+};
+
+const DEFAULT_HAIKU_BINDINGS: KeyBinding[] = [
+  isWindowsPlatform ? HAIKU_WINDOWS_DEFAULT_BINDING : HAIKU_NON_WINDOWS_DEFAULT_BINDING,
+];
 
 export const SHORTCUT_DEFINITIONS: ShortcutDefinition[] = [
   {
@@ -172,7 +191,7 @@ export const SHORTCUT_DEFINITIONS: ShortcutDefinition[] = [
     labelKey: I18N_KEYS.shortcutSelectHaiku,
     defaultLabel: 'Haiku 4.5',
     category: 'otherShortcuts',
-    defaultBindings: [{ key: '0', code: 'Digit0', mod: true, shift: true }],
+    defaultBindings: DEFAULT_HAIKU_BINDINGS,
   },
   {
     id: 'selectSonnet',
@@ -205,6 +224,25 @@ export const DEFAULT_SETTINGS: SettingsData = {
 
 export const STORAGE_KEY = 'claudePowerSuiteSettings';
 
+function isSameBinding(a: KeyBinding, b: KeyBinding): boolean {
+  const modsA = normalizeModifiers(a);
+  const modsB = normalizeModifiers(b);
+  const modifiersMatch =
+    modsA.mod === modsB.mod &&
+    modsA.ctrl === modsB.ctrl &&
+    modsA.meta === modsB.meta &&
+    modsA.shift === modsB.shift &&
+    modsA.alt === modsB.alt;
+  const keyMatch = a.key.toLowerCase() === b.key.toLowerCase();
+  const codeMatch = a.code && b.code ? a.code === b.code : false;
+  return modifiersMatch && (keyMatch || codeMatch);
+}
+
+function isLegacyHaikuBinding(bindings: KeyBinding[] | undefined): boolean {
+  if (!Array.isArray(bindings) || bindings.length !== 1) return false;
+  return isSameBinding(bindings[0], HAIKU_NON_WINDOWS_DEFAULT_BINDING);
+}
+
 export function mergeSettings(partial: Partial<SettingsData> | undefined | null): SettingsData {
   const featureToggles = { ...DEFAULT_FEATURE_TOGGLES, ...(partial?.featureToggles ?? {}) };
   const shortcuts: Record<ShortcutId, KeyBinding[]> = { ...DEFAULT_SHORTCUTS };
@@ -215,6 +253,10 @@ export function mergeSettings(partial: Partial<SettingsData> | undefined | null)
       const shortcutId = id as ShortcutId;
       shortcuts[shortcutId] = bindings.length ? bindings : DEFAULT_SHORTCUTS[shortcutId];
     }
+  }
+
+  if (isWindowsPlatform && isLegacyHaikuBinding(shortcuts.selectHaiku)) {
+    shortcuts.selectHaiku = DEFAULT_SHORTCUTS.selectHaiku;
   }
 
   return { featureToggles, shortcuts };

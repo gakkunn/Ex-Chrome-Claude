@@ -6,6 +6,7 @@ const platform =
     : '';
 
 export const isMacPlatform = platform.includes('mac');
+export const isWindowsPlatform = platform.startsWith('win');
 
 export function isModKey(event: { metaKey?: boolean; ctrlKey?: boolean }): boolean {
   return isMacPlatform ? !!event.metaKey : !!event.ctrlKey;

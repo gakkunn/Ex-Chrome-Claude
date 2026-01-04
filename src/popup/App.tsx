@@ -34,7 +34,8 @@ const initialSettings: SettingsData = {
 };
 
 const GITHUB_URL = 'https://github.com/gakkunn/Ex-Chrome-Claude';
-const SUPPORT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScTb5N21gzjuGKWrSeoNwy7HZdcSmU9kKJGnJ-PMHwla8sHGA/viewform';
+const SUPPORT_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScTb5N21gzjuGKWrSeoNwy7HZdcSmU9kKJGnJ-PMHwla8sHGA/viewform';
 const COFFEE_URL = 'https://buymeacoffee.com/gakkunn';
 
 const ICON_GITHUB_SRC = '/img/github.svg';

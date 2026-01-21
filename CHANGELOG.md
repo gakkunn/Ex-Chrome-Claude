@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 - 2026-01-21
+
+### Features
+- Add review footer layout in popup
+- Add i18n messages for review footer prompt
+
+### Documentation
+- Add design guidance and reproduction steps for the review footer
+
 ## 1.1.1 - 2026-01-04
 
 ### Features
@@ -27,4 +36,3 @@
 
 ## 1.0.0 - 2025-12-07
 - Initial release
-

@@ -7,6 +7,7 @@ export const I18N_KEYS = {
   popupSectionFeatures: 'popup_section_features',
   popupSectionShortcuts: 'popup_section_shortcuts',
   popupMessageEnableFeature: 'popup_message_enable_feature',
+  popupFooterReviewPrompt: 'popup_footer_review_prompt',
   popupPlaceholderPressKeys: 'popup_placeholder_press_keys',
   popupAriaShortcutInput: 'popup_aria_shortcut_input',
   popupErrorShortcutConflict: 'popup_error_shortcut_conflict',

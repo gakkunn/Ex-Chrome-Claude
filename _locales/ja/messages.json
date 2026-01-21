@@ -27,6 +27,10 @@
     "message": "ショートカットを変更するには上の機能を有効にしてください。",
     "description": "Helper message shown when no shortcuts can be edited."
   },
+  "popup_footer_review_prompt": {
+    "message": "短いコメントでもくれると心の底から喜びます。",
+    "description": "Message shown above the footer links encouraging reviews."
+  },
   "popup_placeholder_press_keys": {
     "message": "キーを押してください",
     "description": "Placeholder text inside the shortcut input field."

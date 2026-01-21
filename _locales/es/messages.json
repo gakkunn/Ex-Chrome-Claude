@@ -27,6 +27,10 @@
     "message": "Activa una función arriba para personalizar sus atajos.",
     "description": "Helper message shown when no shortcuts can be edited."
   },
+  "popup_footer_review_prompt": {
+    "message": "Incluso un comentario breve me alegraría de corazón.",
+    "description": "Message shown above the footer links encouraging reviews."
+  },
   "popup_placeholder_press_keys": {
     "message": "Presiona las teclas",
     "description": "Placeholder text inside the shortcut input field."

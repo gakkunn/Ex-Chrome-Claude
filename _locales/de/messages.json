@@ -27,6 +27,10 @@
     "message": "Aktiviere oben eine Funktion, um ihre Kurzbefehle anzupassen.",
     "description": "Helper message shown when no shortcuts can be edited."
   },
+  "popup_footer_review_prompt": {
+    "message": "Schon ein kurzer Kommentar würde mich von Herzen freuen.",
+    "description": "Message shown above the footer links encouraging reviews."
+  },
   "popup_placeholder_press_keys": {
     "message": "Tasten drücken",
     "description": "Placeholder text inside the shortcut input field."

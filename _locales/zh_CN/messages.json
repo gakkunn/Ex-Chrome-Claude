@@ -27,6 +27,10 @@
     "message": "启用上方的功能即可自定义其快捷键。",
     "description": "Helper message shown when no shortcuts can be edited."
   },
+  "popup_footer_review_prompt": {
+    "message": "哪怕只留一句简短的评论也会让我由衷地开心。",
+    "description": "Message shown above the footer links encouraging reviews."
+  },
   "popup_placeholder_press_keys": {
     "message": "请按下按键",
     "description": "Placeholder text inside the shortcut input field."

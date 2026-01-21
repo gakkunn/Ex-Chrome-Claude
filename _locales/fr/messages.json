@@ -27,6 +27,10 @@
     "message": "Activez une fonctionnalité ci-dessus pour personnaliser ses raccourcis.",
     "description": "Helper message shown when no shortcuts can be edited."
   },
+  "popup_footer_review_prompt": {
+    "message": "Même un bref commentaire me ferait chaud au cœur.",
+    "description": "Message shown above the footer links encouraging reviews."
+  },
   "popup_placeholder_press_keys": {
     "message": "Appuyez sur les touches",
     "description": "Placeholder text inside the shortcut input field."

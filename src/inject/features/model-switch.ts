@@ -26,19 +26,62 @@ function getDropdownButton(): HTMLButtonElement | null {
   return document.querySelector<HTMLButtonElement>(SELECTORS.MODEL_DROPDOWN);
 }
 
+const MODEL_FAMILIES = ['haiku', 'sonnet', 'opus'] as const;
+
+function normalizeText(value: string | null | undefined): string {
+  return (value ?? '').replace(/\s+/g, ' ').trim();
+}
+
+function isVisibleElement(element: HTMLElement): boolean {
+  if (!element.isConnected) return false;
+  const rect = element.getBoundingClientRect();
+  if (rect.width === 0 && rect.height === 0) return false;
+
+  const style = window.getComputedStyle(element);
+  return style.display !== 'none' && style.visibility !== 'hidden';
+}
+
+function getMenuItemModelText(item: HTMLElement): string {
+  const label = item.querySelector<HTMLElement>(SELECTORS.MODEL_MENU_ITEM_LABEL);
+  const labelText = normalizeText(label?.textContent);
+  if (labelText) return labelText;
+  return normalizeText(item.textContent);
+}
+
+function hasModelFamilyItem(menu: HTMLElement): boolean {
+  const items = menu.querySelectorAll<HTMLElement>(SELECTORS.MODEL_MENU_ITEM);
+  for (const item of items) {
+    const text = getMenuItemModelText(item).toLowerCase();
+    if (MODEL_FAMILIES.some((family) => text.startsWith(family))) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function getOpenModelMenuContainer(): HTMLElement | null {
-  return document.querySelector<HTMLElement>(SELECTORS.MODEL_MENU_CONTAINER);
+  for (const selector of SELECTORS.MODEL_MENU_CONTAINER_CANDIDATES) {
+    const menus = document.querySelectorAll<HTMLElement>(selector);
+    for (const menu of menus) {
+      if (!isVisibleElement(menu)) continue;
+      if (!hasModelFamilyItem(menu)) continue;
+      return menu;
+    }
+  }
+
+  return null;
 }
 
 function findModelMenuItemByName(modelName: string): HTMLElement | null {
   const menu = getOpenModelMenuContainer();
   if (!menu) return null;
 
-  const labels = menu.querySelectorAll<HTMLElement>(SELECTORS.MODEL_MENU_ITEM);
-  for (const label of labels) {
-    const text = label.textContent?.trim();
-    if (text === modelName) {
-      return label.closest<HTMLElement>('div[role="menuitem"]') ?? label;
+  const target = normalizeText(modelName).toLowerCase();
+  const items = menu.querySelectorAll<HTMLElement>(SELECTORS.MODEL_MENU_ITEM);
+  for (const item of items) {
+    const text = getMenuItemModelText(item).toLowerCase();
+    if (text.startsWith(target)) {
+      return item;
     }
   }
   return null;
@@ -126,11 +169,11 @@ export function initModelSwitch(): void {
       if (action === 'toggle') {
         toggleModelDropdown();
       } else if (action === 'haiku') {
-        void selectModelByName('Haiku 4.5');
+        void selectModelByName('Haiku');
       } else if (action === 'sonnet') {
-        void selectModelByName('Sonnet 4.5');
+        void selectModelByName('Sonnet');
       } else if (action === 'opus') {
-        void selectModelByName('Opus 4.5');
+        void selectModelByName('Opus');
       }
     }, 0);
   };

@@ -82,15 +82,15 @@ function handleOtherShortcut(event: KeyboardEvent, id: ShortcutId): boolean {
       return true;
     case 'selectHaiku':
       preventEvent(event);
-      void selectModelByName('Haiku 4.5');
+      void selectModelByName('Haiku');
       return true;
     case 'selectSonnet':
       preventEvent(event);
-      void selectModelByName('Sonnet 4.5');
+      void selectModelByName('Sonnet');
       return true;
     case 'selectOpus':
       preventEvent(event);
-      void selectModelByName('Opus 4.5');
+      void selectModelByName('Opus');
       return true;
     default:
       return false;

@@ -18,7 +18,7 @@ This is an open-source extension implemented based on Chrome Extension Manifest 
 - Safe Send: Enter inserts a newline while Cmd/Ctrl + Enter sends, preventing accidental sends; toggle in the popup.
 - Wide Screen / Focus: cleans header blur, widens the content area, and lets you toggle focus on the composer.
 - Shortcut automation: toggle/pin sidebar, open new chat, start incognito chat, star/delete the current chat from the keyboard.
-- Model shortcuts: open the model dropdown or jump directly to Haiku 4.5, Sonnet 4.5, or Opus 4.5.
+- Model shortcuts: open the model dropdown or jump directly to Haiku, Sonnet, or Opus.
 
 ---
 

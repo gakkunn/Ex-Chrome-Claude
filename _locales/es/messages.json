@@ -144,16 +144,16 @@
     "description": "Shortcut label for toggling the model selector."
   },
   "shortcut_select_haiku": {
-    "message": "Haiku 4.5",
-    "description": "Shortcut label for selecting the Haiku 4.5 model."
+    "message": "Haiku",
+    "description": "Shortcut label for selecting the Haiku model."
   },
   "shortcut_select_sonnet": {
-    "message": "Sonnet 4.5",
-    "description": "Shortcut label for selecting the Sonnet 4.5 model."
+    "message": "Sonnet",
+    "description": "Shortcut label for selecting the Sonnet model."
   },
   "shortcut_select_opus": {
-    "message": "Opus 4.5",
-    "description": "Shortcut label for selecting the Opus 4.5 model."
+    "message": "Opus",
+    "description": "Shortcut label for selecting the Opus model."
   },
   "dialog_section_claude_defaults": {
     "message": "Valores predeterminados de Claude",

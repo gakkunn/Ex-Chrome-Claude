@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.1 - 2026-02-09
+
+### Fixes
+- Support updated Claude model menu DOM for model selection shortcuts
+- Use version-agnostic model matching so Cmd/Ctrl + Shift + 0/8/9 keeps working across model version updates
+
+### Chores
+- Make model shortcut labels version-agnostic across settings and all locale message files
+
+### Documentation
+- Update README model shortcut names to Haiku/Sonnet/Opus
+
 ## 1.2.0 - 2026-01-21
 
 ### Features

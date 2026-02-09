@@ -1,6 +1,6 @@
 {
   "name": "claude_power_suite",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "scripts": {
     "dev": "npm run dev:watch",

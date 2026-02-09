@@ -5,7 +5,7 @@ const hostMatches = ['https://claude.ai/*'];
 export default defineManifest({
   manifest_version: 3,
   name: '__MSG_extension_name__',
-  version: '1.2.0',
+  version: '1.2.1',
   description: '__MSG_extension_description__',
   default_locale: 'en',
   icons: {

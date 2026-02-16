@@ -1,10 +1,17 @@
 # Changelog
 
+## 1.4.0 - 2026-02-16
+
+### Features
+- Add Copy Last Message shortcut (Cmd/Ctrl + Shift + Y) with full locale coverage
+
+### Documentation
+- Update README default shortcut highlights to include the new copy-last-message binding
+
 ## 1.3.0 - 2026-02-16
 
 ### Features
 - Add usage indicator below chat composer showing session and weekly usage (resets, percent) from /settings/usage
-- Add Copy Last Message shortcut (Cmd/Ctrl + Shift + Y) with full locale coverage
 
 ## 1.2.1 - 2026-02-09
 

@@ -15,6 +15,37 @@
   pointer-events: auto;
 }
 
+.cps-usage-indicator {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: inherit;
+  opacity: 0.72;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.15s ease;
+}
+
+[data-testid='chat-input-grid-container']:has(.cws-fieldset):not(:has(.cws-fieldset:hover)):not(
+    :has(.cws-fieldset.cws-focused)
+  ):not(:has(.cws-fieldset .cws-composer:focus-within))
+  .cps-usage-indicator {
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-testid='chat-input-grid-container']:has(.cws-fieldset:hover) .cps-usage-indicator,
+[data-testid='chat-input-grid-container']:has(.cws-fieldset.cws-focused) .cps-usage-indicator,
+[data-testid='chat-input-grid-container']:has(.cws-fieldset .cws-composer:focus-within)
+  .cps-usage-indicator {
+  opacity: 0.72;
+  pointer-events: auto;
+}
+
 /* for clean ui on claude.ai */
 .font-display.w-full.sm\:-ml-0\.5.sm\:block {
   opacity: 0;

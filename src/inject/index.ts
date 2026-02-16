@@ -18,6 +18,7 @@ import { openNewChatViaSidebar } from './features/new-chat-close-sidebar';
 import { starCurrentChatViaMenu } from './features/pin-chat';
 import { ShortcutsDialogController } from './features/shortcuts-dialog';
 import { toggleSidebarPin } from './features/sidebar';
+import { UsageIndicator } from './features/usage-indicator';
 import { vimScrollController, type ScrollAction } from './features/vim-scroll';
 import { isEditableElement } from './utils/common';
 
@@ -29,6 +30,7 @@ let settings: SettingsData = { ...DEFAULT_SETTINGS };
 
 const focusManager = new FocusManager();
 const shortcutsDialog = new ShortcutsDialogController();
+const usageIndicator = new UsageIndicator();
 
 function getBindings(id: ShortcutId): KeyBinding[] {
   const custom = settings.shortcuts[id];
@@ -234,6 +236,7 @@ function setupListeners(): void {
   document.addEventListener('keydown', handleKeydown, true);
   document.addEventListener('keyup', handleKeyup, true);
   shortcutsDialog.init();
+  usageIndicator.enable();
 }
 
 function setupSettingsBridge(): void {

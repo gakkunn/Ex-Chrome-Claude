@@ -68,7 +68,7 @@ npm run dev   # development watch build -> dist/
 4. Default highlights:
    - Enter → newline, Cmd/Ctrl + Enter → send (Safe Send)
    - j/k scroll, Shift+J/K half-page scroll, Cmd/Ctrl+J/K jump bottom/top (Vim-like Scroll)
-   - Cmd/Ctrl + Shift + S toggle/pin sidebar, Cmd/Ctrl + Shift + O open new chat, Cmd/Ctrl + I toggle incognito chat, Cmd/Ctrl + Shift + Backspace/Delete opens delete confirmation, Cmd/Ctrl + Shift + P stars the chat
+   - Cmd/Ctrl + Shift + S toggle/pin sidebar, Cmd/Ctrl + Shift + O open new chat, Cmd/Ctrl + I toggle incognito chat, Cmd/Ctrl + Shift + Backspace/Delete opens delete confirmation, Cmd/Ctrl + Shift + P stars the chat, Cmd/Ctrl + Shift + Y copies the latest user message
    - Cmd/Ctrl + Shift + ArrowDown opens the model menu; Cmd/Ctrl + Shift + 0/8/9 selects Haiku/Sonnet/Opus (Windows uses Ctrl + Shift + 7 for Haiku)
 
 ---

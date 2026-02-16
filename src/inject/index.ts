@@ -11,6 +11,7 @@ import {
 } from '../shared/settings';
 
 import { openDeleteModalAndFocusConfirm } from './features/chat-delete';
+import { copyLastUserMessageViaActionBar } from './features/copy-last-message';
 import { FocusManager } from './features/focus-management';
 import { toggleIncognitoChat } from './features/incognito-chat';
 import { toggleModelDropdown, selectModelByName } from './features/model-switch';
@@ -77,6 +78,10 @@ function handleOtherShortcut(event: KeyboardEvent, id: ShortcutId): boolean {
     case 'bookmarkChat':
       preventEvent(event);
       void starCurrentChatViaMenu();
+      return true;
+    case 'copyLastMessage':
+      preventEvent(event);
+      copyLastUserMessageViaActionBar();
       return true;
     case 'toggleModel':
       preventEvent(event);
@@ -198,6 +203,7 @@ function handleKeydown(event: KeyboardEvent): void {
       'toggleIncognitoChat',
       'deleteChat',
       'bookmarkChat',
+      'copyLastMessage',
       'toggleModel',
       'selectHaiku',
       'selectSonnet',

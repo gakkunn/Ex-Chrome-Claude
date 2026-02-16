@@ -306,6 +306,9 @@ const getShortcutLabel = (definition: ShortcutDefinition): string => {
   return t(definition.labelKey, undefined, definition.defaultLabel);
 };
 
+const NEW_BADGE_SHORTCUTS = new Set<ShortcutId>(['copyLastMessage']);
+const NEW_BADGE_TOGGLES = new Set<FeatureToggleKey>([]);
+
 export function App() {
   const [settings, setSettings] = useState<SettingsData>(initialSettings);
   const [message, setMessage] = useState<MessageState>(null);
@@ -498,19 +501,26 @@ export function App() {
       <section className="card">
         <h2>{t(I18N_KEYS.popupSectionFeatures, undefined, 'Features')}</h2>
         <div className="toggle-list">
-          {Object.entries(FEATURE_TOGGLE_DEFINITIONS).map(([id]) => (
-            <label className="toggle" key={id}>
-              <input
-                type="checkbox"
-                checked={!!settings.featureToggles[id as keyof typeof FEATURE_TOGGLE_DEFINITIONS]}
-                onChange={(event) =>
-                  void handleToggle(id as FeatureToggleKey, event.currentTarget.checked)
-                }
-                disabled={loading}
-              />
-              <span>{getFeatureLabel(id as FeatureToggleKey)}</span>
-            </label>
-          ))}
+          {Object.entries(FEATURE_TOGGLE_DEFINITIONS).map(([id]) => {
+            const toggleKey = id as FeatureToggleKey;
+            const shouldShowNewBadge = NEW_BADGE_TOGGLES.has(toggleKey);
+            return (
+              <label className="toggle" key={id}>
+                <input
+                  type="checkbox"
+                  checked={!!settings.featureToggles[toggleKey]}
+                  onChange={(event) =>
+                    void handleToggle(toggleKey, event.currentTarget.checked)
+                  }
+                  disabled={loading}
+                />
+                <span>
+                  {getFeatureLabel(toggleKey)}
+                  {shouldShowNewBadge && <span className="toggle-badge">new</span>}
+                </span>
+              </label>
+            );
+          })}
         </div>
       </section>
 
@@ -521,9 +531,13 @@ export function App() {
         </div>
         {enabledShortcuts.map((definition) => {
           const label = getShortcutLabel(definition);
+          const shouldShowNewBadge = NEW_BADGE_SHORTCUTS.has(definition.id);
           return (
             <div className="shortcut-row" key={definition.id}>
-              <div className="shortcut-label">{label}</div>
+              <div className="shortcut-label">
+                <span>{label}</span>
+                {shouldShowNewBadge && <span className="toggle-badge">new</span>}
+              </div>
               <ShortcutInput
                 label={label}
                 bindings={getBindings(settings, definition)}

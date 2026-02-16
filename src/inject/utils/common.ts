@@ -31,6 +31,12 @@ export interface WaitOptions {
   interval?: number;
 }
 
+export interface ScrollPositionSnapshot {
+  element: HTMLElement;
+  top: number;
+  left: number;
+}
+
 export function isEditableElement(el: EventTarget | null): el is HTMLElement {
   if (!el || !(el instanceof Element)) return false;
   if (el instanceof HTMLElement && el.isContentEditable) return true;
@@ -138,6 +144,70 @@ export function scrollIntoViewSafe(
   } catch {
     // Ignore errors
   }
+}
+
+function isAxisScrollable(styleValue: string, scrollSize: number, clientSize: number): boolean {
+  return (
+    (styleValue === 'auto' || styleValue === 'scroll' || styleValue === 'overlay') &&
+    scrollSize > clientSize + 1
+  );
+}
+
+export function getScrollableAncestors(element: Element | null): HTMLElement[] {
+  const ancestors: HTMLElement[] = [];
+  const seen = new Set<HTMLElement>();
+
+  let current: HTMLElement | null =
+    element instanceof HTMLElement ? element.parentElement : (element?.parentElement ?? null);
+
+  while (current && current !== document.body) {
+    const style = getComputedStyle(current);
+    const canScrollY = isAxisScrollable(
+      style.overflowY,
+      current.scrollHeight,
+      current.clientHeight
+    );
+    const canScrollX = isAxisScrollable(style.overflowX, current.scrollWidth, current.clientWidth);
+    if ((canScrollY || canScrollX) && !seen.has(current)) {
+      ancestors.push(current);
+      seen.add(current);
+    }
+    current = current.parentElement;
+  }
+
+  const root = (document.scrollingElement as HTMLElement | null) || document.documentElement;
+  if (root && !seen.has(root)) {
+    ancestors.push(root);
+  }
+
+  return ancestors;
+}
+
+export function captureScrollPositions(
+  elements: Array<HTMLElement | null | undefined>
+): ScrollPositionSnapshot[] {
+  const snapshots: ScrollPositionSnapshot[] = [];
+  const seen = new Set<HTMLElement>();
+
+  elements.forEach((element) => {
+    if (!element || seen.has(element)) return;
+    seen.add(element);
+    snapshots.push({
+      element,
+      top: element.scrollTop,
+      left: element.scrollLeft,
+    });
+  });
+
+  return snapshots;
+}
+
+export function restoreScrollPositions(snapshots: ScrollPositionSnapshot[]): void {
+  snapshots.forEach(({ element, top, left }) => {
+    if (!element.isConnected) return;
+    element.scrollTop = top;
+    element.scrollLeft = left;
+  });
 }
 
 export function getClaudeInputElement(): HTMLElement | null {

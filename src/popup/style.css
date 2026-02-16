@@ -144,8 +144,23 @@ h2 {
 }
 
 .shortcut-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13px;
   color: #e2e8f0;
+}
+
+.toggle-badge {
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1px 6px;
+  margin-left: 4px;
+  border-radius: 999px;
+  background: #fcd34d;
+  color: #0f172a;
+  line-height: 1.4;
 }
 
 .shortcut-input {

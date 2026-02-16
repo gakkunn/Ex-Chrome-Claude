@@ -155,6 +155,10 @@
     "message": "Opus",
     "description": "Shortcut label for selecting the Opus model."
   },
+  "shortcut_copy_last_message": {
+    "message": "Letzte Nachricht kopieren",
+    "description": "Shortcut label for copying the latest user message."
+  },
   "dialog_section_claude_defaults": {
     "message": "Claude-Standardwerte",
     "description": "Heading for the Claude default shortcuts section in the dialog."

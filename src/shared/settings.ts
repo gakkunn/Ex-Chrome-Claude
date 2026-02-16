@@ -32,6 +32,7 @@ export interface ShortcutDefinition extends LabeledMessage {
     | 'toggleIncognitoChat'
     | 'deleteChat'
     | 'bookmarkChat'
+    | 'copyLastMessage'
     | 'toggleModel'
     | 'selectHaiku'
     | 'selectSonnet'
@@ -92,6 +93,13 @@ const DEFAULT_HAIKU_BINDINGS: KeyBinding[] = [
 ];
 
 export const SHORTCUT_DEFINITIONS: ShortcutDefinition[] = [
+  {
+    id: 'copyLastMessage',
+    labelKey: I18N_KEYS.shortcutCopyLastMessage,
+    defaultLabel: 'Copy Last Message',
+    category: 'otherShortcuts',
+    defaultBindings: [{ key: 'Y', code: 'KeyY', mod: true, shift: true }],
+  },
   {
     id: 'scrollTop',
     labelKey: I18N_KEYS.shortcutScrollTop,

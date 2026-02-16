@@ -33,6 +33,7 @@ export const I18N_KEYS = {
   shortcutToggleIncognitoChat: 'shortcut_toggle_incognito_chat',
   shortcutDeleteChat: 'shortcut_delete_chat',
   shortcutBookmarkChat: 'shortcut_bookmark_chat',
+  shortcutCopyLastMessage: 'shortcut_copy_last_message',
   shortcutToggleModel: 'shortcut_toggle_model',
   shortcutSelectHaiku: 'shortcut_select_haiku',
   shortcutSelectSonnet: 'shortcut_select_sonnet',

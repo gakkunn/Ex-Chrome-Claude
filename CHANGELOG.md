@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2026-02-16
+
+### Features
+- Add usage indicator below chat composer showing session and weekly usage (resets, percent) from /settings/usage
+
 ## 1.2.1 - 2026-02-09
 
 ### Fixes

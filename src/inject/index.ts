@@ -21,7 +21,7 @@ import { ShortcutsDialogController } from './features/shortcuts-dialog';
 import { toggleSidebarPin } from './features/sidebar';
 import { UsageIndicator } from './features/usage-indicator';
 import { vimScrollController, type ScrollAction } from './features/vim-scroll';
-import { isEditableElement } from './utils/common';
+import { isKeyboardEventInEditableContext } from './utils/common';
 
 const shortcutMap = new Map<ShortcutId, ShortcutDefinition>(
   SHORTCUT_DEFINITIONS.map((shortcut) => [shortcut.id, shortcut])
@@ -106,10 +106,14 @@ function handleOtherShortcut(event: KeyboardEvent, id: ShortcutId): boolean {
 
 function handleRestrictedShortcuts(event: KeyboardEvent): boolean {
   const key = (event.key || '').toLowerCase();
+  const inEditable = isKeyboardEventInEditableContext(event);
 
   if (isModKey(event) && !event.altKey && !event.shiftKey && key === 'k') {
-    preventEvent(event);
-    return true;
+    if (!inEditable) {
+      preventEvent(event);
+      return true;
+    }
+    return false;
   }
 
   if (isModKey(event) && !event.altKey && !event.shiftKey && key === '.') {
@@ -117,8 +121,6 @@ function handleRestrictedShortcuts(event: KeyboardEvent): boolean {
     return true;
   }
 
-  const target = event.target as Element | null;
-  const inEditable = isEditableElement(target) || isEditableElement(document.activeElement);
   if (!inEditable && !isModKey(event) && event.shiftKey && !event.altKey && key === 'i') {
     preventEvent(event);
     return true;
@@ -239,8 +241,8 @@ function applySettings(next: SettingsData): void {
 }
 
 function setupListeners(): void {
-  document.addEventListener('keydown', handleKeydown, true);
-  document.addEventListener('keyup', handleKeyup, true);
+  window.addEventListener('keydown', handleKeydown, true);
+  window.addEventListener('keyup', handleKeyup, true);
   shortcutsDialog.init();
   usageIndicator.enable();
 }

@@ -1,7 +1,11 @@
 import { isModKey } from '@/shared/keyboard';
 
 import type { ClaudeVimScrollHandle } from '../types/global';
-import { getScrollContainer, isEditableElement } from '../utils/common';
+import {
+  getScrollContainer,
+  isEditableElement,
+  isKeyboardEventInEditableContext,
+} from '../utils/common';
 
 type ScrollDirection = 'up' | 'down' | null;
 export type ScrollAction = 'top' | 'bottom' | 'up' | 'down' | 'halfUp' | 'halfDown';
@@ -79,13 +83,15 @@ function animateScroll(container: HTMLElement, targetTop: number, duration: numb
 
 export class VimScrollController {
   handleShortcut(event: KeyboardEvent, action: ScrollAction): boolean {
-    if (isEditableElement(document.activeElement)) {
+    const inEditable = isKeyboardEventInEditableContext(event);
+    if (inEditable) {
       return false;
     }
 
     const container = getScrollContainer();
     event.preventDefault();
     event.stopPropagation();
+    if (event.stopImmediatePropagation) event.stopImmediatePropagation();
 
     const maxScrollTop = container.scrollHeight - container.clientHeight;
     let targetTop: number;

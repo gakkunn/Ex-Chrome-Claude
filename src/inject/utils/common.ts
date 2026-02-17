@@ -51,6 +51,13 @@ export function isEditableElement(el: EventTarget | null): el is HTMLElement {
   return false;
 }
 
+export function isKeyboardEventInEditableContext(event: KeyboardEvent): boolean {
+  const target = event.target as Element | null;
+  if (isEditableElement(target)) return true;
+  if (target) return false;
+  return isEditableElement(document.activeElement);
+}
+
 export function simulateMouseClick(target: Element | null): void {
   if (!target) return;
 

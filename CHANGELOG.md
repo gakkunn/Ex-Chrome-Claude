@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 - 2026-02-17
+
+### Features
+- Add a Claude Defaults shortcut row for Quick chat or search (Cmd/Ctrl + K and Cmd/Ctrl + Shift + K)
+
+### Fixes
+- Resolve Cmd/Ctrl + K conflicts so extension scrolling works when not typing and Claude default quick chat/search remains available while editing text
+
 ## 1.4.0 - 2026-02-16
 
 ### Features

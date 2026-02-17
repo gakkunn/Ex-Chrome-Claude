@@ -179,6 +179,10 @@
     "message": "键盘快捷键",
     "description": "Name of Claude's default keyboard shortcuts row."
   },
+  "dialog_default_quick_chat_or_search": {
+    "message": "Quick chat or search",
+    "description": "Name of the quick chat or search shortcut row in the dialog."
+  },
   "dialog_default_settings": {
     "message": "设置",
     "description": "Name of the Settings shortcut row in the dialog."

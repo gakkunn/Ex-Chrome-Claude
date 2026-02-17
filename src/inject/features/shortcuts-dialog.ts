@@ -31,6 +31,14 @@ const CLAUDE_DEFAULT_SHORTCUTS: ShortcutRow[] = [
     bindings: [[MOD_SYMBOL, '/']],
   },
   {
+    nameKey: I18N_KEYS.dialogDefaultQuickChatOrSearch,
+    fallbackName: 'Quick chat or search',
+    bindings: [
+      [MOD_SYMBOL, 'K'],
+      [MOD_SYMBOL, SHIFT_SYMBOL, 'K'],
+    ],
+  },
+  {
     nameKey: I18N_KEYS.dialogDefaultSettings,
     fallbackName: 'Settings',
     bindings: [[SHIFT_SYMBOL, MOD_SYMBOL, ',']],

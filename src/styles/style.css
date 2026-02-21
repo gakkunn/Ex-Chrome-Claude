@@ -110,6 +110,12 @@ button[aria-label='Scroll to bottom'] {
   display: none !important;
 }
 
+/* Hide chat input alert bands (e.g. usage limit banners) */
+[data-testid='chat-input-grid-container'] [data-alert-band-wrapper='true'],
+[data-chat-input-container='true'] [data-alert-band-wrapper='true'] {
+  display: none !important;
+}
+
 /* Hide disclaimer note when Wide Screen / Focus mode is enabled */
 body.cps-wide-screen-enabled .sticky [role='note'] {
   opacity: 0 !important;

@@ -1,8 +1,12 @@
-const CHAT_INPUT_CONTAINER_SELECTOR = '[data-testid="chat-input-grid-container"]';
+const CHAT_INPUT_CONTAINER_SELECTORS = [
+  '[data-testid="chat-input-grid-container"]',
+  '[data-chat-input-container="true"]',
+] as const;
 const CHAT_INPUT_SELECTOR =
   'div.tiptap.ProseMirror[contenteditable="true"][data-testid="chat-input"], textarea[data-testid="chat-input-ssr"]';
 const EXTRA_USAGE_SECTION_SELECTOR = 'section[data-testid="extra-usage-section"]';
 const INDICATOR_SELECTOR = '[data-cps-usage-indicator="true"]';
+const CHAT_INPUT_DISCLAIMER_SELECTOR = '[role="note"], [data-disclaimer="true"]';
 
 const REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 const SEND_REFRESH_DELAY_MS = 1200;
@@ -260,10 +264,23 @@ function isVisible(element: HTMLElement): boolean {
   return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
 }
 
+function listChatInputContainers(): HTMLElement[] {
+  const seen = new Set<HTMLElement>();
+  const containers: HTMLElement[] = [];
+
+  for (const selector of CHAT_INPUT_CONTAINER_SELECTORS) {
+    for (const container of document.querySelectorAll<HTMLElement>(selector)) {
+      if (seen.has(container)) continue;
+      seen.add(container);
+      containers.push(container);
+    }
+  }
+
+  return containers;
+}
+
 function pickTargetContainer(): HTMLElement | null {
-  const containers = Array.from(
-    document.querySelectorAll<HTMLElement>(CHAT_INPUT_CONTAINER_SELECTOR)
-  );
+  const containers = listChatInputContainers();
   if (!containers.length) return null;
 
   const active = containers.filter((container) => {
@@ -282,6 +299,14 @@ function pickTargetContainer(): HTMLElement | null {
   }
 
   return containers[containers.length - 1];
+}
+
+function getIndicatorAnchor(container: HTMLElement): Element | null {
+  if (container.matches('[data-chat-input-container="true"]')) {
+    return container.querySelector(`:scope > ${CHAT_INPUT_DISCLAIMER_SELECTOR}`);
+  }
+
+  return null;
 }
 
 export class UsageIndicator {
@@ -423,9 +448,20 @@ export class UsageIndicator {
     if (!container) return;
 
     const indicator = this.getOrCreateIndicator();
+    const anchor = getIndicatorAnchor(container);
     if (indicator.parentElement !== container) {
-      container.appendChild(indicator);
-    } else if (container.lastElementChild !== indicator) {
+      container.insertBefore(indicator, anchor);
+      return;
+    }
+
+    if (anchor) {
+      if (indicator.nextElementSibling !== anchor) {
+        container.insertBefore(indicator, anchor);
+      }
+      return;
+    }
+
+    if (container.lastElementChild !== indicator) {
       container.appendChild(indicator);
     }
   }

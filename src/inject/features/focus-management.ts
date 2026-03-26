@@ -1,6 +1,9 @@
 const RETRIES = 10;
 const INTERVAL = 200;
-const CONTAINER_SELECTOR = '[data-testid="chat-input-grid-container"]';
+const CONTAINER_SELECTORS = [
+  '[data-testid="chat-input-grid-container"]',
+  '[data-chat-input-container="true"]',
+] as const;
 const RICH_INPUT_SELECTOR =
   'div.tiptap.ProseMirror[contenteditable="true"][data-testid="chat-input"]';
 const SSR_INPUT_SELECTOR = 'textarea[data-testid="chat-input-ssr"]';
@@ -68,9 +71,24 @@ export class FocusManager {
     this.scheduleScan();
   }
 
+  private collectContainers(): HTMLElement[] {
+    const seen = new Set<HTMLElement>();
+    const containers: HTMLElement[] = [];
+
+    for (const selector of CONTAINER_SELECTORS) {
+      for (const container of document.querySelectorAll<HTMLElement>(selector)) {
+        if (seen.has(container)) continue;
+        seen.add(container);
+        containers.push(container);
+      }
+    }
+
+    return containers;
+  }
+
   private collectInputs(): InputElement[] {
     const inputs: InputElement[] = [];
-    const containers = document.querySelectorAll<HTMLElement>(CONTAINER_SELECTOR);
+    const containers = this.collectContainers();
     containers.forEach((container) => {
       inputs.push(
         ...container.querySelectorAll<InputElement>(RICH_INPUT_SELECTOR),
@@ -106,7 +124,7 @@ export class FocusManager {
     const fieldset = input.closest('fieldset');
     if (!fieldset) return;
 
-    const container = fieldset.closest(CONTAINER_SELECTOR);
+    const container = fieldset.closest(CONTAINER_SELECTORS.join(', '));
     if (!container) return;
     if (fieldset.getAttribute('aria-hidden') === 'true') return;
 

@@ -33,6 +33,10 @@
 [data-testid='chat-input-grid-container']:has(.cws-fieldset):not(:has(.cws-fieldset:hover)):not(
     :has(.cws-fieldset.cws-focused)
   ):not(:has(.cws-fieldset .cws-composer:focus-within))
+  .cps-usage-indicator,
+[data-chat-input-container='true']:has(.cws-fieldset):not(:has(.cws-fieldset:hover)):not(
+    :has(.cws-fieldset.cws-focused)
+  ):not(:has(.cws-fieldset .cws-composer:focus-within))
   .cps-usage-indicator {
   opacity: 0;
   pointer-events: none;
@@ -41,6 +45,10 @@
 [data-testid='chat-input-grid-container']:has(.cws-fieldset:hover) .cps-usage-indicator,
 [data-testid='chat-input-grid-container']:has(.cws-fieldset.cws-focused) .cps-usage-indicator,
 [data-testid='chat-input-grid-container']:has(.cws-fieldset .cws-composer:focus-within)
+  .cps-usage-indicator,
+[data-chat-input-container='true']:has(.cws-fieldset:hover) .cps-usage-indicator,
+[data-chat-input-container='true']:has(.cws-fieldset.cws-focused) .cps-usage-indicator,
+[data-chat-input-container='true']:has(.cws-fieldset .cws-composer:focus-within)
   .cps-usage-indicator {
   opacity: 0.72;
   pointer-events: auto;

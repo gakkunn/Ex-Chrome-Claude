@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.1 - 2026-03-26
+
+### Fixes
+- Restore the usage indicator below the chat composer after Claude updated the input container DOM.
+- Keep the indicator and focus wiring compatible with both the legacy and current chat input structures.
+
 ## 1.5.0 - 2026-02-17
 
 ### Features

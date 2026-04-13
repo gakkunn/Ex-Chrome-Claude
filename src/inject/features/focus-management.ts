@@ -1,12 +1,7 @@
+import { CHAT_INPUT_SELECTOR, resolveChatInputTarget } from '../utils/chat-input';
+
 const RETRIES = 10;
 const INTERVAL = 200;
-const CONTAINER_SELECTORS = [
-  '[data-testid="chat-input-grid-container"]',
-  '[data-chat-input-container="true"]',
-] as const;
-const RICH_INPUT_SELECTOR =
-  'div.tiptap.ProseMirror[contenteditable="true"][data-testid="chat-input"]';
-const SSR_INPUT_SELECTOR = 'textarea[data-testid="chat-input-ssr"]';
 const FIELDSET_CLASS = 'cws-fieldset';
 const COMPOSER_CLASS = 'cws-composer';
 const FOCUSED_CLASS = 'cws-focused';
@@ -71,31 +66,8 @@ export class FocusManager {
     this.scheduleScan();
   }
 
-  private collectContainers(): HTMLElement[] {
-    const seen = new Set<HTMLElement>();
-    const containers: HTMLElement[] = [];
-
-    for (const selector of CONTAINER_SELECTORS) {
-      for (const container of document.querySelectorAll<HTMLElement>(selector)) {
-        if (seen.has(container)) continue;
-        seen.add(container);
-        containers.push(container);
-      }
-    }
-
-    return containers;
-  }
-
   private collectInputs(): InputElement[] {
-    const inputs: InputElement[] = [];
-    const containers = this.collectContainers();
-    containers.forEach((container) => {
-      inputs.push(
-        ...container.querySelectorAll<InputElement>(RICH_INPUT_SELECTOR),
-        ...container.querySelectorAll<InputElement>(SSR_INPUT_SELECTOR)
-      );
-    });
-    return inputs;
+    return Array.from(document.querySelectorAll<InputElement>(CHAT_INPUT_SELECTOR));
   }
 
   private findComposer(input: InputElement, fieldset: HTMLElement): HTMLElement | null {
@@ -121,12 +93,12 @@ export class FocusManager {
     if (this.bindings.has(input)) return;
     if (!this.enabled) return;
 
-    const fieldset = input.closest('fieldset');
-    if (!fieldset) return;
+    const target = resolveChatInputTarget(input);
+    if (!target) return;
 
-    const container = fieldset.closest(CONTAINER_SELECTORS.join(', '));
-    if (!container) return;
+    const { fieldset, container } = target;
     if (fieldset.getAttribute('aria-hidden') === 'true') return;
+    if (container.getAttribute('aria-hidden') === 'true') return;
 
     const composer = this.findComposer(input, fieldset);
     if (!composer) return;

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.2 - 2026-04-13
+
+### Fixes
+- Show the usage indicator below the empty composer in new chats as well as after the first message.
+- Share the chat input resolver between usage and focus handling so both features bind the same composer DOM.
+- Keep the indicator visibility rules aligned with the fallback chat input container used by the new layout.
+
 ## 1.5.1 - 2026-03-26
 
 ### Fixes

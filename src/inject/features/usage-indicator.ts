@@ -1,9 +1,11 @@
-const CHAT_INPUT_CONTAINER_SELECTORS = [
-  '[data-testid="chat-input-grid-container"]',
-  '[data-chat-input-container="true"]',
-] as const;
-const CHAT_INPUT_SELECTOR =
-  'div.tiptap.ProseMirror[contenteditable="true"][data-testid="chat-input"], textarea[data-testid="chat-input-ssr"]';
+import {
+  CHAT_INPUT_CONTAINER_SELECTORS,
+  CHAT_INPUT_SELECTOR,
+  ResolvedChatInputTarget,
+  collectChatInputTargets,
+  resolveChatInputContainerFromElement,
+} from '../utils/chat-input';
+
 const EXTRA_USAGE_SECTION_SELECTOR = 'section[data-testid="extra-usage-section"]';
 const INDICATOR_SELECTOR = '[data-cps-usage-indicator="true"]';
 const CHAT_INPUT_DISCLAIMER_SELECTOR = '[role="note"], [data-disclaimer="true"]';
@@ -264,45 +266,45 @@ function isVisible(element: HTMLElement): boolean {
   return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
 }
 
-function listChatInputContainers(): HTMLElement[] {
-  const seen = new Set<HTMLElement>();
-  const containers: HTMLElement[] = [];
+function listChatInputTargetsWithUniqueContainers(): ResolvedChatInputTarget[] {
+  const targets = collectChatInputTargets();
+  const deduped = new Map<HTMLElement, ResolvedChatInputTarget>();
 
-  for (const selector of CHAT_INPUT_CONTAINER_SELECTORS) {
-    for (const container of document.querySelectorAll<HTMLElement>(selector)) {
-      if (seen.has(container)) continue;
-      seen.add(container);
-      containers.push(container);
-    }
+  for (const target of targets) {
+    deduped.set(target.container, target);
   }
 
-  return containers;
+  return Array.from(deduped.values());
 }
 
-function pickTargetContainer(): HTMLElement | null {
-  const containers = listChatInputContainers();
-  if (!containers.length) return null;
+function pickTargetChatInput(): ResolvedChatInputTarget | null {
+  const targets = listChatInputTargetsWithUniqueContainers();
+  if (!targets.length) return null;
 
-  const active = containers.filter((container) => {
-    if (container.getAttribute('aria-hidden') === 'true') return false;
-    if (!container.querySelector(CHAT_INPUT_SELECTOR)) return false;
-    return isVisible(container);
+  const active = targets.filter((target) => {
+    if (target.container.getAttribute('aria-hidden') === 'true') return false;
+    return isVisible(target.container);
   });
 
   if (active.length) {
     return active[active.length - 1];
   }
 
-  const visible = containers.filter((container) => isVisible(container));
+  const visible = targets.filter((target) => isVisible(target.container));
   if (visible.length) {
     return visible[visible.length - 1];
   }
 
-  return containers[containers.length - 1];
+  return targets[targets.length - 1];
 }
 
-function getIndicatorAnchor(container: HTMLElement): Element | null {
-  if (container.matches('[data-chat-input-container="true"]')) {
+function getIndicatorAnchor(target: ResolvedChatInputTarget): Element | null {
+  if (target.usesFallbackContainer) {
+    return target.fieldset.nextElementSibling;
+  }
+
+  const { container } = target;
+  if (container.matches(CHAT_INPUT_CONTAINER_SELECTORS[1])) {
     return container.querySelector(`:scope > ${CHAT_INPUT_DISCLAIMER_SELECTOR}`);
   }
 
@@ -388,7 +390,7 @@ export class UsageIndicator {
     if (!(target instanceof Element)) return;
     const button = target.closest('button');
     if (!button) return;
-    if (!button.closest(CHAT_INPUT_CONTAINER_SELECTOR)) return;
+    if (!resolveChatInputContainerFromElement(button)) return;
 
     const type = (button.getAttribute('type') ?? '').toLowerCase();
     const ariaLabel = (button.getAttribute('aria-label') ?? '').toLowerCase();
@@ -444,11 +446,12 @@ export class UsageIndicator {
 
   private ensureAttached(): void {
     if (!this.enabled) return;
-    const container = pickTargetContainer();
-    if (!container) return;
+    const target = pickTargetChatInput();
+    if (!target) return;
 
     const indicator = this.getOrCreateIndicator();
-    const anchor = getIndicatorAnchor(container);
+    const { container } = target;
+    const anchor = getIndicatorAnchor(target);
     if (indicator.parentElement !== container) {
       container.insertBefore(indicator, anchor);
       return;

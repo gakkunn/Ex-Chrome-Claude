@@ -613,12 +613,13 @@ export class UsageIndicator {
       };
 
       const tryParse = (): void => {
-        let doc: Document | null = null;
-        try {
-          doc = iframe.contentDocument;
-        } catch {
-          return;
-        }
+        const doc = (() => {
+          try {
+            return iframe.contentDocument;
+          } catch {
+            return null;
+          }
+        })();
         if (!doc) return;
 
         const snapshot = parseUsageSnapshotFromDocument(doc);

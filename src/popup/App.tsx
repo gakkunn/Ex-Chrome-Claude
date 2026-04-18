@@ -509,9 +509,7 @@ export function App() {
                 <input
                   type="checkbox"
                   checked={!!settings.featureToggles[toggleKey]}
-                  onChange={(event) =>
-                    void handleToggle(toggleKey, event.currentTarget.checked)
-                  }
+                  onChange={(event) => void handleToggle(toggleKey, event.currentTarget.checked)}
                   disabled={loading}
                 />
                 <span>

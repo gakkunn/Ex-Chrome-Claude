@@ -49,7 +49,7 @@ export default defineManifest({
     {
       matches: hostMatches,
       js: ['src/content/injector.ts'],
-      css: ['styles/style.css'],
+      css: ['src/styles/style.css'],
       run_at: 'document_idle',
     },
   ],

@@ -22,24 +22,35 @@
     "preact": "^10.25.1"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "^2.2.1",
-    "@eslint/js": "^9.39.1",
-    "@preact/preset-vite": "^2.10.2",
+    "@crxjs/vite-plugin": "^2.4.0",
+    "@eslint/js": "^10.0.1",
+    "@preact/preset-vite": "^2.10.5",
     "@types/chrome": "^0.0.260",
     "@types/node": "^22.9.0",
-    "@typescript-eslint/eslint-plugin": "^8.47.0",
-    "@typescript-eslint/parser": "^8.47.0",
-    "eslint": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
+    "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-import-resolver-typescript": "^3.7.0",
-    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.6.2",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.47.0",
-    "vite": "^7.2.6"
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.8"
+  },
+  "overrides": {
+    "@crxjs/vite-plugin": {
+      "rollup": "2.80.0",
+      "@rollup/pluginutils": {
+        "picomatch": "2.3.2"
+      }
+    },
+    "flatted": "3.4.2",
+    "micromatch": {
+      "picomatch": "2.3.2"
+    },
+    "yaml": "2.8.3"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
